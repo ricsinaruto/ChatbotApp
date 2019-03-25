@@ -1,0 +1,5 @@
+github repóról egy pdf doksiba kommentálás, screenshotok
+ + ebben travis CI screenshotok
+
+github access token:
+a171faac44a5eff583ff88c01e69cd457bdca6a4
