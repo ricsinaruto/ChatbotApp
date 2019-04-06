@@ -31,4 +31,14 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         super.onStop();
         mainPresenter.detachScreen();
     }
+
+    @Override
+    public void login(String username, String password) {
+
+    }
+
+    @Override
+    public void register(String username, String password) {
+
+    }
 }

@@ -1,10 +1,13 @@
 package com.example.chatbotapp.ui.chat;
 
 import com.example.chatbotapp.di.Network;
+import com.example.chatbotapp.interactor.ChatEvent;
 import com.example.chatbotapp.interactor.ChatInteractor;
 import com.example.chatbotapp.ui.Presenter;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.Executor;
 
@@ -30,5 +33,14 @@ public class ChatPresenter extends Presenter<ChatScreen> {
     public void detachScreen() {
         EventBus.getDefault().unregister(this);
         super.detachScreen();
+    }
+
+    public void refreshChat(final String message) {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final ChatEvent event) {
+
     }
 }

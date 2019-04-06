@@ -4,23 +4,17 @@ import com.example.chatbotapp.ChatbotApplication;
 
 import javax.inject.Inject;
 
-
-public class ChatInteractor {
+public class MainInteractor {
     @Inject
-    public ChatInteractor() {
+    public MainInteractor() {
         ChatbotApplication.injector.inject(this);
     }
 
-    public void sendMessage(String message) {
+    public void login(String username, String password) {
 
     }
 
-    public void getMessages() {
+    public void register(String username, String password) {
 
     }
-
-    public void updateChatbotName(String name) {
-
-    }
-
 }

@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import com.example.chatbotapp.interactor.ChatInteractor;
+import com.example.chatbotapp.interactor.MainInteractor;
 import com.example.chatbotapp.network.NetworkModule;
 import com.example.chatbotapp.ui.UIModule;
 import com.example.chatbotapp.ui.chat.ChatFragment;
@@ -18,6 +19,8 @@ public interface ChatbotApplicationComponent {
     void inject(ChatFragment chatFragment);
 
     void inject(ChatInteractor chatInteractor);
+
+    void inject(MainInteractor mainInteractor);
 
     void inject(ChatPresenter chatPresenter);
 }

@@ -20,4 +20,11 @@ public class MainPresenter extends Presenter<MainScreen> {
         super.detachScreen();
     }
 
+    public void login(String username, String password) {
+        screen.login(username, password);
+    }
+
+    public void register(String username, String password) {
+        screen.register(username, password);
+    }
 }
