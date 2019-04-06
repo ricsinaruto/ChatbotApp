@@ -1,4 +1,0 @@
-github repóról egy pdf doksiba kommentálás, screenshotok
- + ebben travis CI screenshotok
-
-Alkalmazás architektúra mobilrendszerek diák és a spotifydemo alapján
