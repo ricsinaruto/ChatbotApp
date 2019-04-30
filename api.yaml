@@ -1,0 +1,160 @@
+swagger: "2.0"
+info:
+  description: "Chatbot API calls."
+  version: "0.1"
+  title: "ChatbotApp"
+host: ""
+basePath: "/chatbot"
+tags:
+- name: "chat"
+  description: "Chatbot calls"
+- name: "user"
+  description: "Operations about user"
+schemes:
+- "https"
+- "http"
+paths:
+  /chat:
+    get:
+      tags:
+      - "chat"
+      summary: "Get chatbot name and all chat data for current user"
+      description: ""
+      operationId: "getChat"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The user name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Chat"
+  /chat/message:
+    post:
+      tags:
+      - "chat"
+      summary: "Send a message to the server"
+      description: ""
+      operationId: "sendMessage"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Utterance that we need a response to"
+        required: true
+        schema:
+          $ref: "#/definitions/Utterance"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Utterance"
+  /user/register:
+    get:
+      tags:
+      - "user"
+      summary: "Register new user"
+      description: ""
+      operationId: "registerUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The choosen password in clear text"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        400:
+          description: "User already exists"
+  /user/login:
+    get:
+      tags:
+      - "user"
+      summary: "Login existing user"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        400:
+          description: "Wrong username or password"
+  /user/chatbotName:
+    get:
+      tags:
+      - "user"
+      summary: "User changes the name of the chatbot"
+      description: ""
+      operationId: "changeChatbotName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name"
+        required: true
+        type: "string"
+      - name: "chatbotName"
+        in: "query"
+        description: "The chatbot name specified by user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+definitions:
+  Chat:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      utterances:
+        type: "array"
+        xml:
+          name: "utterance"
+          wrapped: true
+        items:
+          type: "string"
+    xml:
+      name: "Chat"
+  Utterance:
+    type: "object"
+    properties:
+      utterance:
+        type: "string"
+    xml:
+      name: "Utterance"
