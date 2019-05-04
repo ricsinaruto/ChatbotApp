@@ -3,6 +3,7 @@ package com.example.chatbotapp.ui.chat;
 import com.example.chatbotapp.di.Network;
 import com.example.chatbotapp.interactor.ChatEvent;
 import com.example.chatbotapp.interactor.ChatInteractor;
+import com.example.chatbotapp.interactor.MessageEvent;
 import com.example.chatbotapp.ui.Presenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -35,12 +36,44 @@ public class ChatPresenter extends Presenter<ChatScreen> {
         super.detachScreen();
     }
 
-    public void refreshChat(final String message) {
+    public void refreshChat(final String message, final String user) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                chatInteractor.sendMessage(message,user);
+            }
+        });
+    }
 
+    public void getChat(final String user) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                chatInteractor.getMessages(user);
+            }
+        });
+    }
+
+    public void refreshName(final String user, final String name) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                chatInteractor.updateChatbotName(user,name);
+            }
+        });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final MessageEvent event) {
+        if (screen != null) {
+            screen.updateMessages(event.getMessage());
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final ChatEvent event) {
-
+        if (screen != null) {
+            screen.showMessages(event.getMessages());
+        }
     }
 }

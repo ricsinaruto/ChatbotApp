@@ -3,13 +3,15 @@ package com.example.chatbotapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ChatResult {
 
-    @SerializedName("artists")
+    @SerializedName("utterances")
     @Expose
-    private Chat chat;
+    private List<String> utterances;
 
-    public Chat getChat() {return chat;}
+    public List<String> getUtterances() {return utterances;}
 
-    public void setChat(Chat chat) {this.chat = chat;}
+    public void setUtterances(List<String> utterances) {this.utterances = utterances;}
 }

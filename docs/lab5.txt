@@ -1,6 +1,0 @@
-1. swaggerrel yaml file az editorban (kész)
-2. network module megírása (http kérések)
-3. test mock réteg elkészítése (spotify demo)
-4. Room orm perzisztencia (repository packageben dagger modul)
-    https://github.com/kpomazi/moblab19
-5. Orm mock réteg is

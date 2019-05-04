@@ -3,7 +3,6 @@ info:
   description: "Chatbot API calls."
   version: "0.1"
   title: "ChatbotApp"
-host: ""
 basePath: "/chatbot"
 tags:
 - name: "chat"
@@ -20,12 +19,12 @@ paths:
       - "chat"
       summary: "Get chatbot name and all chat data for current user"
       description: ""
-      operationId: "getChat"
+      operationId: "chat.getChat"
       produces:
       - "application/json"
       parameters:
       - name: "username"
-        in: "path"
+        in: "query"
         description: "The user name"
         required: true
         type: "string"
@@ -40,7 +39,7 @@ paths:
       - "chat"
       summary: "Send a message to the server"
       description: ""
-      operationId: "sendMessage"
+      operationId: "chat.sendMessage"
       consumes:
       - "application/json"
       produces:
@@ -51,19 +50,19 @@ paths:
         description: "Utterance that we need a response to"
         required: true
         schema:
-          $ref: "#/definitions/Utterance"
+          $ref: "#/definitions/Message"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Utterance"
+            $ref: "#/definitions/Message"
   /user/register:
     get:
       tags:
       - "user"
       summary: "Register new user"
       description: ""
-      operationId: "registerUser"
+      operationId: "user.registerUser"
       produces:
       - "application/json"
       parameters:
@@ -81,16 +80,14 @@ paths:
         200:
           description: "successful operation"
           schema:
-            type: "string"
-        400:
-          description: "User already exists"
+            $ref: "#/definitions/Message"
   /user/login:
     get:
       tags:
       - "user"
       summary: "Login existing user"
       description: ""
-      operationId: "loginUser"
+      operationId: "user.loginUser"
       produces:
       - "application/json"
       parameters:
@@ -108,16 +105,14 @@ paths:
         200:
           description: "successful operation"
           schema:
-            type: "string"
-        400:
-          description: "Wrong username or password"
+            $ref: "#/definitions/Message"
   /user/chatbotName:
     get:
       tags:
       - "user"
       summary: "User changes the name of the chatbot"
       description: ""
-      operationId: "changeChatbotName"
+      operationId: "user.changeChatbotName"
       produces:
       - "application/json"
       parameters:
@@ -140,21 +135,19 @@ definitions:
   Chat:
     type: "object"
     properties:
-      name:
-        type: "string"
       utterances:
         type: "array"
         xml:
-          name: "utterance"
+          name: "utterances"
           wrapped: true
         items:
           type: "string"
     xml:
       name: "Chat"
-  Utterance:
+  Message:
     type: "object"
     properties:
       utterance:
         type: "string"
     xml:
-      name: "Utterance"
+      name: "Message"

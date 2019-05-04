@@ -1,7 +1,7 @@
 package com.example.chatbotapp.ui.main;
 
-public interface MainScreen {
-    void login(String username, String password);
+import java.util.List;
 
-    void register(String username, String password);
+public interface MainScreen {
+    void getMessages(String username);
 }

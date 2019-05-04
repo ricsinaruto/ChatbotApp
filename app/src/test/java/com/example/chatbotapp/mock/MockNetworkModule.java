@@ -1,4 +1,6 @@
-package com.example.chatbotapp.network;
+package com.example.chatbotapp.mock;
+
+import com.example.chatbotapp.network.ChatApi;
 
 import javax.inject.Singleton;
 
@@ -8,7 +10,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class NetworkModule {
+public class MockNetworkModule {
+
     @Provides
     @Singleton
     public Retrofit.Builder provideRetrofit() {
@@ -19,7 +22,8 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public ChatApi provideChatApi(Retrofit.Builder retrofitBuilder) {
-        return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(ChatApi.class);
+    public ChatApi provideArtistsApi(Retrofit.Builder retrofitBuilder) {
+        return new MockChatApi();
     }
+
 }
