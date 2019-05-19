@@ -65,7 +65,7 @@ public class MockChatApi implements ChatApi {
     }
 
     @Override
-    public Call<StringResult> sendMessage(@Field("body") String body, @Query("username") String username) {
+    public Call<StringResult> sendMessage(@Field("body") StringResult body, @Query("username") String username) {
         final StringResult stringResult = new StringResult();
         stringResult.setMessage("How are you?");
 

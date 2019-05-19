@@ -32,6 +32,11 @@ public class Chat {
     @Ignore
     private List<String> messages;
 
+    @SerializedName("user_messages")
+    @Expose
+    @Ignore
+    private List<String> user_messages;
+
     @ColumnInfo(name="messages")
     private String concatMessages;
 
@@ -73,5 +78,13 @@ public class Chat {
 
     public void setConcatMessages(String concatMessages) {
         this.concatMessages = concatMessages;
+    }
+
+    public List<String> getUser_messages() {
+        return user_messages;
+    }
+
+    public void setUser_messages(List<String> user_messages) {
+        this.user_messages = user_messages;
     }
 }

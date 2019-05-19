@@ -31,6 +31,7 @@ public class ChatFragment extends Fragment implements ChatScreen {
     private ChatAdapter chatAdapter;
     private Button sendButton;
     private List<String> utterances;
+    private List<String> user_utterances;
 
     public ChatFragment() {
         ChatbotApplication.injector.inject(this);
@@ -62,13 +63,18 @@ public class ChatFragment extends Fragment implements ChatScreen {
         chatView.setLayoutManager(llm);
 
         utterances = new ArrayList<String>();
+        user_utterances = new ArrayList<String>();
         chat.setMessages(utterances);
-        chatAdapter = new ChatAdapter(getContext(), utterances);
+        chat.setUser_messages(user_utterances);
+        chatAdapter = new ChatAdapter(getContext(), utterances, user_utterances);
         chatView.setAdapter(chatAdapter);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user_utterances.add(editMessage.getText().toString());
+                chat.setUser_messages(user_utterances);
+                chatAdapter.notifyDataSetChanged();
                 chatPresenter.refreshChat(editMessage.getText().toString(), chat.getUsername());
             }
         });
@@ -83,8 +89,16 @@ public class ChatFragment extends Fragment implements ChatScreen {
 
     @Override
     public void showMessages(List<String> messages) {
-        utterances.addAll(messages);
-        chat.setMessages(messages);
+        for (int i=0; i<messages.size(); i++) {
+            if (i%2==0) {
+                user_utterances.add(messages.get(i));
+            }
+            else {
+                utterances.add(messages.get(i));
+            }
+        }
+        chat.setMessages(utterances);
+        chat.setUser_messages(user_utterances);
 
         chatAdapter.notifyDataSetChanged();
     }

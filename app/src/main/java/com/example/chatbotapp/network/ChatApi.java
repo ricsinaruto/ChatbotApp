@@ -14,7 +14,7 @@ public interface ChatApi {
     Call<ChatResult> getChat(@Query("username") String username);
 
     @POST("chat/message")
-    Call<StringResult> sendMessage(@Body String message,
+    Call<StringResult> sendMessage(@Body StringResult message,
                                    @Query("username") String username);
 
     @GET("user/chatbotName")

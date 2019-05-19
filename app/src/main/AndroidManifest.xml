@@ -7,9 +7,9 @@
     <application
         android:name=".ChatbotApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/my_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/my_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.main.MainActivity">
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.chat.ChatActivity"
-            android:label="ChatActivitiy"
+            android:label=""
             android:theme="@style/AppTheme"></activity>
     </application>
 

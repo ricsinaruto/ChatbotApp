@@ -29,7 +29,7 @@ public class ChatInteractor {
     public void sendMessage(String message, String username) {
         MessageEvent event = new MessageEvent();
 
-        Call<StringResult> chatQueryCall = chatApi.sendMessage("{\"message\":"+message+"}", username);
+        Call<StringResult> chatQueryCall = chatApi.sendMessage(new StringResult(message), username);
         try {
             Response<StringResult> response = chatQueryCall.execute();
             event.setMessage(response.body().getMessage());

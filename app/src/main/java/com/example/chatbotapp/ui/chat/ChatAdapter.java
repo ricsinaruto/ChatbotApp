@@ -20,10 +20,12 @@ import java.util.List;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private Context context;
     private List<String> utterances;
+    private List<String> user_utterances;
 
-    public ChatAdapter(Context context, List<String> utterances) {
+    public ChatAdapter(Context context, List<String> utterances, List<String> user_utterances) {
         this.context = context;
         this.utterances = utterances;
+        this.user_utterances = user_utterances;
     }
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -35,7 +37,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String utt = utterances.get(position);
+        String user_utt = user_utterances.get(position);
         holder.message.setText(utt);
+        holder.messageUser.setText(user_utt);
     }
 
     @Override
@@ -45,10 +49,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView message;
+        public TextView messageUser;
 
         public ViewHolder(View textView) {
             super(textView);
             message = itemView.findViewById(R.id.messageView);
+            messageUser = itemView.findViewById(R.id.messageViewUser);
         }
     }
 }
