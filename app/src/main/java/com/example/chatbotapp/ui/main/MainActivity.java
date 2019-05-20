@@ -3,6 +3,7 @@ package com.example.chatbotapp.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import com.example.chatbotapp.ChatbotApplication;
 import com.example.chatbotapp.R;
 import com.example.chatbotapp.ui.chat.ChatActivity;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
@@ -19,9 +22,13 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     MainPresenter mainPresenter;
     private EditText editUsername;
     private EditText editPassword;
+    private static Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ChatbotApplication application = (ChatbotApplication) this.getApplication();
+        mTracker = application.getDefaultTracker();
+
         ChatbotApplication.injector.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -46,6 +53,14 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                                         editPassword.getText().toString());
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("Analytics", "Setting screen name: main");
+        mTracker.setScreenName("Image~main");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

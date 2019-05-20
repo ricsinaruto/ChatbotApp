@@ -16,6 +16,7 @@ import com.example.chatbotapp.ChatbotApplication;
 import com.example.chatbotapp.R;
 import com.example.chatbotapp.model.Chat;
 import com.example.chatbotapp.ui.main.MainActivity;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class ChatFragment extends Fragment implements ChatScreen {
     private Button sendButton;
     private List<String> utterances;
     private List<String> user_utterances;
+
 
     public ChatFragment() {
         ChatbotApplication.injector.inject(this);
@@ -54,6 +56,9 @@ public class ChatFragment extends Fragment implements ChatScreen {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         editMessage = view.findViewById(R.id.editMessage);
         sendButton = view.findViewById(R.id.sendText);
@@ -85,6 +90,7 @@ public class ChatFragment extends Fragment implements ChatScreen {
     public void onResume() {
         super.onResume();
         chatPresenter.getChat(chat.getUsername());
+
     }
 
     @Override
